@@ -1,404 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanical Engineer Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Mechanical Engineer</title>
+  <style>
+    :root{
+      --bg:#0f1724; /* dark navy */
+      --card:#0b1220;
+      --accent:#FFE406; /* user-provided accent */
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#071026 0%, #0b1530 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+      display:flex;
+      justify-content:center;
+      min-height:100vh;
+    }
+    .container{
+      width:100%;
+      max-width:980px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:18px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    header{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      margin-bottom:22px;
+    }
+    .avatar{
+      width:88px;height:88px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffd84f);
+      display:flex;align-items:center;justify-content:center;color:#081224;font-weight:700;font-size:28px;flex:0 0 88px;
+      box-shadow: 0 6px 18px rgba(14,20,30,0.6);
+    }
+    h1{margin:0;font-size:22px;letter-spacing:0.2px}
+    .sub{color:var(--muted);margin-top:6px;font-size:14px}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+    main{display:grid;grid-template-columns:1fr;gap:18px}
+    section.card{
+      background:var(--card);
+      padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);
+    }
+    .projects ul{margin:0;padding-left:20px}
+    .projects li{margin-bottom:8px}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
+    .cad-wrap{
+      display:grid;grid-template-columns:1fr;gap:12px;align-items:start;
+    }
+    .model-card{
+      background:var(--glass);padding:12px;border-radius:12px;border:2px solid rgba(255,255,255,0.02);
+    }
+    /* Make iframe responsive and keep 1:1 aspect ratio */
+    .model-frame{
+      position:relative;width:100%;overflow:hidden;border-radius:10px;border:2px solid var(--accent);
+      background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.05));
+    }
+    .model-frame::before{content:"";display:block;padding-top:100%;} /* 1:1 aspect ratio */
+    .model-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:8px}
 
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-        }
+    footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-top:8px}
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        header p {
-            font-size: 1.3em;
-            opacity: 0.9;
-        }
-
-        section {
-            padding: 50px 40px;
-            border-bottom: 1px solid #eee;
-        }
-
-        section:last-child {
-            border-bottom: none;
-        }
-
-        section h2 {
-            font-size: 2.2em;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-            display: inline-block;
-        }
-
-        .education-info {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-        }
-
-        .education-info h3 {
-            color: #2c3e50;
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        .education-info p {
-            font-size: 1.1em;
-            color: #555;
-        }
-
-        .projects-list {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .projects-list h3 {
-            color: #2c3e50;
-            font-size: 1.6em;
-            margin-bottom: 20px;
-        }
-
-        .projects-list ul {
-            list-style: none;
-        }
-
-        .projects-list li {
-            padding: 15px 0 15px 30px;
-            position: relative;
-            font-size: 1.1em;
-            color: #555;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .projects-list li:last-child {
-            border-bottom: none;
-        }
-
-        .projects-list li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-size: 1.5em;
-        }
-
-        .cad-models {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .model-viewer {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .model-viewer:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .model-viewer h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .model-container {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
-        .file-input-wrapper {
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .file-input-wrapper input[type="file"] {
-            display: none;
-        }
-
-        .file-input-wrapper label {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #667eea;
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-weight: 600;
-        }
-
-        .file-input-wrapper label:hover {
-            background: #764ba2;
-        }
-
-        .model-name {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #666;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            section {
-                padding: 30px 20px;
-            }
-
-            .cad-models {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    @media (min-width:720px){
+      main{grid-template-columns: repeat(2, 1fr);}
+      .education{grid-column:1/3}
+      .cad-wrap{grid-column:2/3}
+    }
+    @media (max-width:520px){
+      .avatar{width:72px;height:72px;font-size:22px}
+      .container{padding:18px}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>John Doe</h1>
-            <p>Mechanical Engineer</p>
-        </header>
+  <div class="container" role="main">
+    <header>
+      <div class="avatar" aria-hidden="true">ME</div>
+      <div>
+        <h1 id="name">Vivin Prashanth</h1>
+        <div class="sub" id="education">B.Tech in Mechanical Engineering — National Institute / Year: 2024</div>
+      </div>
+    </header>
 
-        <section id="education">
-            <h2>Education</h2>
-            <div class="education-info">
-                <h3>Bachelor of Engineering in Mechanical Engineering</h3>
-                <p>University Name | 2018 - 2022</p>
-                <p style="margin-top: 10px;">GPA: 3.8/4.0</p>
-            </div>
-        </section>
+    <main>
+      <section class="card education" aria-labelledby="edu-heading">
+        <h2 id="edu-heading">Education</h2>
+        <p class="sub" style="margin-top:8px">B.Tech — Mechanical Engineering<br/>Minor / Specialization (optional): CAD & Design / Thermal Systems</p>
+      </section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="projects-list">
-                <h3>Key Engineering Projects</h3>
-                <ul>
-                    <li>Designed and optimized a thermal management system for electric vehicle battery packs, reducing operating temperature by 15%</li>
-                    <li>Developed a robotic gripper mechanism using SolidWorks and performed FEA analysis to ensure structural integrity under load conditions</li>
-                    <li>Led a team project to design a sustainable water pumping system for rural areas, incorporating renewable energy solutions</li>
-                </ul>
-            </div>
-        </section>
+      <section class="card projects" aria-labelledby="proj-heading">
+        <h2 id="proj-heading">Projects</h2>
+        <ol style="margin-top:10px;padding-left:18px;">
+          <li><strong>Design & Fabrication of a Portable Heat Exchanger</strong><br/><span class="sub">A compact heat exchanger for field-testing with modular plates and quick-connect fittings.</span></li>
+          <li style="margin-top:8px"><strong>Automated Material Handling Cart</strong><br/><span class="sub">Low-cost embedded controller with obstacle avoidance and load-sensing for factory floor use.</span></li>
+          <li style="margin-top:8px"><strong>Topology-Optimized Bracket</strong><br/><span class="sub">Topology optimization workflow producing a lightweight bracket validated with FEA.</span></li>
+        </ol>
+      </section>
 
-        <section id="cad-models">
-            <h2>CAD Models</h2>
-            <div class="cad-models">
-                <div class="model-viewer">
-                    <h3>Chassis Design 2023</h3>
-                    <div class="model-container" id="viewer1"><iframe title="Glbee Embedded Model" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 2px solid #FFE406;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe></div>
-                    
-                    <div class="model-name" id="name1">Loading model...</div>
-                </div>
+      <section class="card cad-wrap" aria-labelledby="cad-heading">
+        <h2 id="cad-heading">CAD Models</h2>
 
-                <div class="model-viewer">
-                    <h3>Model 2</h3>
-                    <div class="model-container" id="viewer2"></div>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="file2" accept=".glb,.gltf">
-                        <label for="file2">Load .glb Model</label>
-                    </div>
-                    <div class="model-name" id="name2">No model loaded</div>
-                </div>
+        <div class="model-card">
+          <p class="sub" style="margin:0 0 8px 0">Interactive 3D model (click and drag to rotate, pinch to zoom on mobile)</p>
 
-                <div class="model-viewer">
-                    <h3>Model 3</h3>
-                    <div class="model-container" id="viewer3"></div>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="file3" accept=".glb,.gltf">
-                        <label for="file3">Load .glb Model</label>
-                    </div>
-                    <div class="model-name" id="name3">No model loaded</div>
-                </div>
-            </div>
-        </section>
-    </div>
+          <div class="model-frame" title="Glbee Embedded Model">
+            <iframe title="Glbee Embedded Model" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 0;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe>
+          </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // GLTFLoader for Three.js r128
-        (function(){var e={exports:{}};!function(t,r){var n;"undefined"!=typeof THREE?n=THREE:void 0!==e&&e.exports&&(n=require("three")),function(e){var t=function(){this.manager=void 0!==e?e:THREE.DefaultLoadingManager};t.prototype={constructor:t,load:function(e,t,r,n){var i=this,a=new THREE.FileLoader(i.manager);a.setPath(i.path),a.setResponseType("arraybuffer"),a.setRequestHeader(i.requestHeader),a.setWithCredentials(i.withCredentials),a.load(e,(function(e){try{i.parse(e,t)}catch(e){n?n(e):console.error(e),i.manager.itemError(e)}}),r,n)},setPath:function(e){return this.path=e,this},setResourcePath:function(e){return this.resourcePath=e,this},setRequestHeader:function(e){return this.requestHeader=e,this},setWithCredentials:function(e){return this.withCredentials=e,this},parse:function(e,t){var r=JSON.parse(function(e){if("undefined"!=typeof TextDecoder)return(new TextDecoder).decode(e);for(var t="",r=0,n=e.length;r<n;r++)t+=String.fromCharCode(e[r]);try{return decodeURIComponent(escape(t))}catch(e){return t}}(new Uint8Array(e,0,4))).asset;if(void 0!==r.version&&"2.0"!==r.version)return void console.error("THREE.GLTFLoader: Unsupported asset version.");new a(e,{path:this.path||this.resourcePath||"",crossOrigin:this.crossOrigin}).parse(t)}};var r=function(){};r.prototype.parse=function(){};var n=function(){};function i(e){this.json=e||{},this.body=null,this.buffers={},this.bufferViews={},this.accessors={},this.meshes={},this.cameras={},this.extensions={}}n.prototype.load=function(){},i.prototype.parse=function(e){this.loadAsync(e).then(e)},i.prototype.loadAsync=function(e){var t=this;return this.fetchResources().then((function(){return t.parse3DModel(e)}))};var a=function(e,t){this.json=null,this.body=null,this.options=t||{},this.parse(e)};a.prototype.parse=function(e){var t=this,r=new Uint8Array(e);if(71===r[0]&&76===r[1]&&84===r[2]&&70===r[3]){for(var n={},i=new DataView(e),a=i.getUint32(8,!0),o=12,s={};o<a;){var l=i.getUint32(o,!0);o+=4;var c=i.getUint32(o,!0);if(o+=4,1313821514===c)s.content=new Uint8Array(e,o,l);else if(5130562===c){var u=new Uint8Array(e,o,l);s.body=u}o+=l}t.json=JSON.parse(function(e){if("undefined"!=typeof TextDecoder)return(new TextDecoder).decode(e);for(var t="",r=0,n=e.length;r<n;r++)t+=String.fromCharCode(e[r]);try{return decodeURIComponent(escape(t))}catch(e){return t}}(s.content)),t.body=s.body}else{var h=new Uint8Array(e);t.json=JSON.parse(function(e){if("undefined"!=typeof TextDecoder)return(new TextDecoder).decode(e);for(var t="",r=0,n=e.length;r<n;r++)t+=String.fromCharCode(e[r]);try{return decodeURIComponent(escape(t))}catch(e){return t}}(h))}};var o={};o.KHR_binary_glTF=r,o.KHR_materials_common=n,n.DEFAULT_LIGHTING_MODEL="constant",void 0!==e&&(e.GLTFLoader=t)}(n)}(),void 0!==e&&e.exports&&(e.exports.GLTFLoader=THREE.GLTFLoader)})();
+        </div>
 
-        class ModelViewer {
-            constructor(containerId, fileInputId, nameDisplayId) {
-                this.container = document.getElementById(containerId);
-                this.fileInput = document.getElementById(fileInputId);
-                this.nameDisplay = document.getElementById(nameDisplayId);
-                
-                this.scene = new THREE.Scene();
-                this.camera = new THREE.PerspectiveCamera(50, this.container.clientWidth / this.container.clientHeight, 0.1, 1000);
-                this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-                
-                this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-                this.renderer.setClearColor(0x667eea, 0);
-                this.container.appendChild(this.renderer.domElement);
-                
-                // Lighting
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-                this.scene.add(ambientLight);
-                
-                const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-                directionalLight1.position.set(5, 10, 5);
-                this.scene.add(directionalLight1);
-                
-                const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.4);
-                directionalLight2.position.set(-5, -5, -5);
-                this.scene.add(directionalLight2);
-                
-                this.camera.position.z = 5;
-                
-                this.model = null;
-                this.rotation = { x: 0, y: 0 };
-                
-                this.fileInput.addEventListener('change', (e) => this.loadModel(e));
-                
-                this.animate();
-            }
-            
-            loadModel(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    this.parseAndDisplayModel(e.target.result, file.name);
-                };
-                
-                reader.readAsArrayBuffer(file);
-            }
-            
-            loadModelFromPath(path) {
-                const loader = new THREE.GLTFLoader();
-                loader.load(
-                    path,
-                    (gltf) => {
-                        this.displayModel(gltf.scene);
-                        this.nameDisplay.textContent = path.split('/').pop();
-                    },
-                    (progress) => {
-                        console.log('Loading progress:', (progress.loaded / progress.total * 100) + '%');
-                    },
-                    (error) => {
-                        console.error('Error loading model:', error);
-                        this.nameDisplay.textContent = 'Model file not found. Upload manually.';
-                    }
-                );
-            }
-            
-            parseAndDisplayModel(arrayBuffer, fileName) {
-                const loader = new THREE.GLTFLoader();
-                
-                loader.parse(arrayBuffer, '', (gltf) => {
-                    this.displayModel(gltf.scene);
-                    this.nameDisplay.textContent = fileName;
-                }, (error) => {
-                    console.error('Error loading model:', error);
-                    this.nameDisplay.textContent = 'Error loading model';
-                });
-            }
-            
-            displayModel(scene) {
-                if (this.model) {
-                    this.scene.remove(this.model);
-                }
-                
-                this.model = scene;
-                
-                // Center and scale model
-                const box = new THREE.Box3().setFromObject(this.model);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const scale = 3 / maxDim;
-                
-                this.model.scale.set(scale, scale, scale);
-                this.model.position.sub(center.multiplyScalar(scale));
-                
-                this.scene.add(this.model);
-            }
-            
-            animate() {
-                requestAnimationFrame(() => this.animate());
-                
-                if (this.model) {
-                    this.model.rotation.y += 0.005;
-                }
-                
-                this.renderer.render(this.scene, this.camera);
-            }
-        }
-        
-        // Initialize viewers
-        const viewer1 = new ModelViewer('viewer1', 'file1', 'name1');
-        const viewer2 = new ModelViewer('viewer2', 'file2', 'name2');
-        const viewer3 = new ModelViewer('viewer3', 'file3', 'name3');
-        
-        // Preload the chassis model
-        viewer1.loadModelFromPath('final_chassis_2023.glb');
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            [viewer1, viewer2, viewer3].forEach(viewer => {
-                viewer.camera.aspect = viewer.container.clientWidth / viewer.container.clientHeight;
-                viewer.camera.updateProjectionMatrix();
-                viewer.renderer.setSize(viewer.container.clientWidth, viewer.container.clientHeight);
-            });
-        });
-    </script>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>Made by <strong>Vivin Prashanth</strong></div>
+      <div class="sub">Minimal portfolio • Mechanical Engineering</div>
+    </footer>
+  </div>
 </body>
 </html>
