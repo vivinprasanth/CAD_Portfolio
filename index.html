@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Portfolio — Mechanical Engineer</title>
+  <title>Portfolio — Vivin Prasanth</title>
   <style>
     :root{
       --bg:#0f1724;
@@ -47,21 +47,40 @@
     }
     h1{margin:0;font-size:22px;letter-spacing:0.2px}
     .sub{color:var(--muted);margin-top:6px;font-size:14px}
+    a{color:var(--accent);text-decoration:none;}
+    a:hover{text-decoration:underline;}
     main{display:grid;grid-template-columns:1fr;gap:18px}
     section.card{
       background:var(--card);
       padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.02);
     }
-    .projects ul{margin:0;padding-left:20px}
-    .projects li{margin-bottom:8px}
-    .cad-wrap{display:grid;grid-template-columns:1fr;gap:12px;align-items:start;}
-    .model-card{background:var(--glass);padding:12px;border-radius:12px;border:2px solid rgba(255,255,255,0.02);}
+    .exp-project{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    @media(min-width:800px){
+      .exp-project{flex-direction:row;}
+      .exp-project section{flex:1;}
+    }
+    .cad-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:space-between;
+    }
+    .model-card{
+      flex:1 1 45%;
+      background:var(--glass);
+      padding:12px;
+      border-radius:12px;
+      border:2px solid rgba(255,255,255,0.02);
+    }
     .model-frame{position:relative;width:100%;overflow:hidden;border-radius:10px;border:2px solid var(--accent);background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.05));}
     .model-frame::before{content:"";display:block;padding-top:100%;}
     .model-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:8px}
     footer{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-top:8px}
-    @media (min-width:720px){main{grid-template-columns: repeat(2, 1fr);} .education{grid-column:1/3} .cad-wrap{grid-column:2/3}}
-    @media (max-width:520px){.avatar{width:72px;height:72px;font-size:22px}.container{padding:18px}}
+    @media (max-width:520px){.avatar{width:72px;height:72px;font-size:22px}.container{padding:18px}.model-card{flex:1 1 100%;}}
   </style>
 </head>
 <body>
@@ -69,41 +88,60 @@
     <header>
       <div class="avatar" aria-hidden="true">VP</div>
       <div>
-        <h1 id="name">Vivin Prashanth</h1>
-        <div class="sub" id="education">B.Tech in Mechanical Engineering — National Institute / Year: 2024</div>
+        <h1 id="name">Vivin Prasanth</h1>
+        <div class="sub">B.Tech in Mechanical Engineering — PES University (2019–2023)</div>
+        <div class="sub">CGPA: 7.31</div>
+        <div class="sub"><a href="mailto:vivinprasanth0906@gmail.com">vivinprasanth0906@gmail.com</a> • <a href="https://github.com/vivinprasanth">GitHub</a> • <a href="https://linkedin.com/in/vivinprasanth0906">LinkedIn</a></div>
       </div>
     </header>
+
     <main>
+      <div class="exp-project">
+        <section class="card" aria-labelledby="exp-heading">
+          <h2 id="exp-heading">Experience</h2>
+          <ul style="margin-top:8px;padding-left:18px;">
+            <li><strong>Material Engineer, Coda Technologies</strong> (Oct 2024 – Present)<br><span class="sub">Worked on classification of mechanical and electrical subparts using UNSPSC standards and collaborated with RCM team to develop PM plans for forklifts and cranes.</span></li>
+            <li style="margin-top:8px"><strong>Associate, Risk Consultancy (PwC)</strong> (Aug 2023 – Jun 2024)<br><span class="sub">Performed internal audits in the GRC domain across logistics and project management, focusing on equipment performance and reliability; analyzed SAP and WMS data logs.</span></li>
+            <li style="margin-top:8px"><strong>Team HAYA - Off-Roading (THOR)</strong> (Jun 2022 – Jun 2023)<br><span class="sub">Designed and validated chassis and jigs/fixtures in SolidWorks; conducted FEA for load validation and served as pilot at BAJA SAE 2023 (2nd place in Maneuverability).</span></li>
+          </ul>
+        </section>
+
+        <section class="card projects" aria-labelledby="proj-heading">
+          <h2 id="proj-heading">Projects</h2>
+          <ol style="margin-top:10px;padding-left:18px;">
+            <li><strong>Experimental and CFD Analysis of Spade Channel Cold Plate for Li-ion Batteries</strong><br/><span class="sub">Conducted research on optimizing cold plate design for thermal management using SolidWorks, COMSOL, and Python-based CFD post-processing.</span></li>
+            <li style="margin-top:8px"><strong>Design & Fabrication of a Portable Heat Exchanger</strong><br/><span class="sub">Designed a compact modular heat exchanger with quick-connect fittings for industrial testing.</span></li>
+            <li style="margin-top:8px"><strong>Automated Material Handling Cart</strong><br/><span class="sub">Built a low-cost embedded cart with obstacle avoidance and load sensing for shop floor use.</span></li>
+          </ol>
+        </section>
+      </div>
+
+      <section class="card" aria-labelledby="cad-heading">
+        <h2 id="cad-heading">CAD Models</h2>
+        <div class="cad-wrap">
+          <div class="model-card">
+            <p class="sub" style="margin:0 0 8px 0">Chassis</p>
+            <div class="model-frame" title="Glbee Embedded Model">
+              <iframe title="Glbee Embedded Model" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 0;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="model-card">
+            <p class="sub" style="margin:0 0 8px 0">Chassis</p>
+            <div class="model-frame" title="Glbee Embedded Model 2">
+              <iframe title="Glbee Embedded Model 2" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 0;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="card education" aria-labelledby="edu-heading">
         <h2 id="edu-heading">Education</h2>
-        <p class="sub" style="margin-top:8px">B.Tech — Mechanical Engineering<br/>Minor / Specialization: CAD & Design / Thermal Systems</p>
-      </section>
-      <section class="card projects" aria-labelledby="proj-heading">
-        <h2 id="proj-heading">Projects</h2>
-        <ol style="margin-top:10px;padding-left:18px;">
-          <li><strong>Design & Fabrication of a Portable Heat Exchanger</strong><br/><span class="sub">A compact heat exchanger for field-testing with modular plates and quick-connect fittings.</span></li>
-          <li style="margin-top:8px"><strong>Automated Material Handling Cart</strong><br/><span class="sub">Low-cost embedded controller with obstacle avoidance and load-sensing for factory floor use.</span></li>
-          <li style="margin-top:8px"><strong>Topology-Optimized Bracket</strong><br/><span class="sub">Topology optimization workflow producing a lightweight bracket validated with FEA.</span></li>
-        </ol>
-      </section>
-      <section class="card cad-wrap" aria-labelledby="cad-heading">
-        <h2 id="cad-heading">CAD Models</h2>
-        <div class="model-card">
-          <p class="sub" style="margin:0 0 8px 0">Interactive 3D model (click and drag to rotate, pinch to zoom on mobile)</p>
-          <div class="model-frame" title="Glbee Embedded Model">
-            <iframe title="Glbee Embedded Model" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 0;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe>
-          </div>
-        </div>
-        <div class="model-card">
-          <p class="sub" style="margin:0 0 8px 0">Second interactive 3D model (same embed example)</p>
-          <div class="model-frame" title="Glbee Embedded Model 2">
-            <iframe title="Glbee Embedded Model 2" width="100%" height="auto" src="https://glb.ee/c5e6f44x?embed=1&cubeoc=1&recenter=1" style="aspect-ratio: 1/1; border: 0;" allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;clipboard-write" allowfullscreen></iframe>
-          </div>
-        </div>
+        <p class="sub" style="margin-top:8px">PES University — B.Tech in Mechanical Engineering (2019–2023)<br/>Key Coursework: Heat Transfer, Strength of Materials, GD&T</p>
       </section>
     </main>
+
     <footer>
-      <div>Made by <strong>Vivin Prashanth</strong></div>
+      <div>Made by <strong>Vivin Prasanth</strong></div>
       <div class="sub">Minimal portfolio • Mechanical Engineering</div>
     </footer>
   </div>
